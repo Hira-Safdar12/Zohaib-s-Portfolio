@@ -2,6 +2,31 @@ document.querySelector(".menu-toggle").addEventListener("click", () => {
     document.querySelector(".nav-links").classList.toggle("active");
 });
 
+ document.getElementById("gmailLink").addEventListener("click", function(event) {
+    event.preventDefault();
+    window.open(
+      "mailto:zohaib.safdar19@gmail.com",
+      "gmailWindow",
+      "width=800,height=600"
+    );
+  });
+
+  // LinkedIn
+  document.getElementById("linkedinLink").addEventListener("click", function(event) {
+    event.preventDefault();
+    window.open(
+      "https://www.linkedin.com/in/zohaibsafdar/",
+      "linkedinWindow",
+      "width=1000,height=700"
+    );
+  });
+
+
+
+
+
+
+
 document.querySelectorAll('.nav-links a').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
