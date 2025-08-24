@@ -1,48 +1,72 @@
-document.querySelector(".menu-toggle").addEventListener("click", () => {
-    document.querySelector(".nav-links").classList.toggle("active");
+const hamburger = document.querySelector(".hamburger");
+const mobileMenu = document.querySelector(".nav-list ul");
+const menuItem = document.querySelectorAll(".nav-list ul li a");
+const header = document.querySelector(".header.container");
+
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  mobileMenu.classList.toggle("active");
 });
 
- document.getElementById("gmailLink").addEventListener("click", function(event) {
-    event.preventDefault();
-    window.open(
-      "mailto:zohaib.safdar19@gmail.com",
-      "gmailWindow",
-      "width=800,height=600"
-    );
+// The classList property allows you to interact with the classes of an HTML element.
+menuItem.forEach((item) => {
+  item.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    mobileMenu.classList.toggle("active");
   });
+});
 
-  // LinkedIn
-  document.getElementById("linkedinLink").addEventListener("click", function(event) {
-    event.preventDefault();
-    window.open(
-      "https://www.linkedin.com/in/zohaibsafdar/",
-      "linkedinWindow",
-      "width=1000,height=700"
-    );
-  });
+// after hero
+document.addEventListener("scroll", () => {
+  var scroll_position = window.scrollY;
+  if (scroll_position > 250) {
+    header.style.backgroundColor = "#29323c";
+  } else {
+    header.style.backgroundColor = "transparent";
+  }
+});
+
+//Resume redirect
+const resumeButton = document.getElementById("resumeBtn");
+
+resumeButton.addEventListener("click", function () {
+  window.open("assets/Zohaib’s-Resume.pdf", "_blank");
+});
 
 
 
+const skillBars = document.querySelectorAll('.skill-bar span');
 
-
-
-
-document.querySelectorAll('.nav-links a').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    const offset = 80; // height of your navbar
-    const bodyRect = document.body.getBoundingClientRect().top;
-    const elementRect = target.getBoundingClientRect().top;
-    const elementPosition = elementRect - bodyRect;
-    const offsetPosition = elementPosition - offset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth"
+function fillBars() {
+  skillBars.forEach(bar => {
+    const value = bar.getAttribute('data-skill');
+    bar.classList.remove('resetting'); // use normal fill speed
+    requestAnimationFrame(() => {
+      bar.style.width = value + '%';
     });
   });
-});
+}
+
+function resetBars() {
+  skillBars.forEach(bar => {
+    bar.classList.add('resetting'); // switch to faster transition
+    bar.style.width = '0%';
+  });
+}
+
+function checkScroll() {
+  const skillsSection = document.querySelector('#skills');
+  const rect = skillsSection.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  if (rect.top < windowHeight && rect.bottom > 0) {
+    fillBars();
+  } else {
+    resetBars();
+  }
+}
+
+window.addEventListener('scroll', checkScroll);
 
 const form = document.querySelector(".Contact-Form");
 const popup = document.getElementById("popup");
@@ -77,36 +101,3 @@ form.addEventListener("submit", function(event) {
 closePopup.addEventListener("click", function() {
   popup.style.display = "none";
 });
-
-// 1. Select the button by its ID
-const resumeButton = document.getElementById("resumeBtn");
-
-resumeButton.addEventListener("click", function () {
-  window.open("assets/Zohaib's-Resume.pdf", "_blank");
-});
-
-
-function animateSkills() {
-  let skills = document.querySelectorAll(".progress");
-
-  skills.forEach(skill => {
-    let rect = skill.getBoundingClientRect();
-    let windowHeight = window.innerHeight;
-
-    if (rect.top < windowHeight - 50 && rect.bottom > 50) {
-      // inside viewport → animate to target
-      let percent = skill.getAttribute("data-percent");
-      skill.style.width = percent + "%";
-    } else {
-      // outside viewport → reset for re-animation
-      skill.style.width = "0%";
-    }
-  });
-}
-
-// Run on scroll and on load
-window.addEventListener("scroll", animateSkills);
-window.addEventListener("load", animateSkills);
-
-
-
