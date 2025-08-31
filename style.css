@@ -1,20 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
@@ -1266,4 +1249,20 @@ b{
 /* Faster reset */
 .skill-bar span.resetting {
   transition: width 0.3s ease; /* shorter time when going back */
+}
+
+@media (max-width: 768px) {
+  #skills {
+    padding: 20px;       /* reduce padding for small screens */
+    min-height: auto;    /* let content decide height */
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  #skills .section-title {
+    font-size: 3.8rem;   /* scale down title for mobile */
+  }
 }
