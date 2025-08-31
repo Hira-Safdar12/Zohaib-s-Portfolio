@@ -721,6 +721,10 @@ p {
   #about .col-left{
     display: none;
   }
+  .col-right a{
+    width: 60%;
+    margin-left: 60px;
+  }
 }
 @media screen and (min-width: 768px) {
   #about .about {
@@ -733,7 +737,7 @@ p {
     padding-left: 60px;
   }
   .col-right a{
-    width: 30vh;
+    width: 30%;
   }
 
   #about .about .col-left .about-img::after {
@@ -752,7 +756,7 @@ p {
   #about .col-right h1 {
     text-align: left;
   }
-  
+
 }
 
 
